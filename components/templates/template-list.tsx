@@ -13,7 +13,19 @@ import { EmailTemplate, TemplateCategory, TemplateFilterOptions } from "@/types/
 import { templateAPI } from "@/lib/api/template"
 import { toast } from "sonner"
 
-export default function TemplateList() {
+interface TemplateListProps {
+  onEditTemplate: (template: EmailTemplate) => void;
+  onViewTemplate: (template: EmailTemplate) => void;
+  onDeleteTemplate: (templateId: string) => Promise<void>;
+  categories: TemplateCategory[];
+}
+
+export default function TemplateList({ 
+  onEditTemplate, 
+  onViewTemplate, 
+  onDeleteTemplate, 
+  categories: propCategories 
+}: TemplateListProps) {
   const router = useRouter()
   const [templates, setTemplates] = useState<EmailTemplate[]>([])
   const [categories, setCategories] = useState<TemplateCategory[]>([])

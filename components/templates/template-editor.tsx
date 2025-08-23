@@ -191,7 +191,8 @@ export default function TemplateEditor({
 
   const updateVariable = (index: number, field: keyof TemplateVariable, value: any) => {
     const current = [...(getValues('variables') ?? [])];
-    current[index] = { ...current[index], [field]: value };
+    const updatedVariable = { ...current[index], [field]: value } as TemplateVariable;
+    current[index] = updatedVariable;
     setValue('variables', current, { shouldDirty: true });
   };
 
